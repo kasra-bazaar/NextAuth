@@ -1,10 +1,11 @@
+import toast, { Toaster } from "react-hot-toast";
 import ProfileForm from "./profile-form";
 import classes from "./user-profile.module.css";
 
 function UserProfile() {
   const change = async (oldAndnew) => {
-    console.log(oldAndnew)
     try {
+      toast("sending ...");
       const res = await fetch("/api/user/change-password", {
         method: "PATCH",
         body: oldAndnew,
@@ -13,18 +14,20 @@ function UserProfile() {
         },
       });
 
-      const data = await res.json();
-      console.log(data);
+      toast.success("you password changed !!");
     } catch (err) {
-      console.log(err);
+      toast.error("somthing went wrong !!");
     }
   };
 
   return (
-    <section className={classes.profile}>
-      <h1>Your User Profile</h1>
-      <ProfileForm changePasswordHandler={change} />
-    </section>
+    <>
+      <Toaster />
+      <section className={classes.profile}>
+        <h1>Your User Profile</h1>
+        <ProfileForm changePasswordHandler={change} />
+      </section>
+    </>
   );
 }
 

@@ -4,7 +4,7 @@ import { Passwords } from "../../../lib/passwords";
 export default async function handler(req, res) {
   const data = req.body;
   const { email, password } = data;
-  console.log(email);
+ 
   if (req.method === "POST") {
     if (
       !email ||
